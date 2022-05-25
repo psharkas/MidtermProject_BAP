@@ -14,4 +14,8 @@ public class SingleClubMember extends Member{
 	//loop through info to check assigned club
 	//use conditional statements to display message back to member
 
+	
+		
+	}
+
 }
