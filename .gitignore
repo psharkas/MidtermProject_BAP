@@ -5,5 +5,6 @@
 log/
 target/
 /bin
-*.class
 .metadata
+*.class
+
