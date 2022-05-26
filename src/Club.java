@@ -24,6 +24,14 @@ public class Club {
 		this.address = address;
 	}
 	
+	public Club() {
+		
+	}
+	public Club(String name, String address) {
+		this.name = name;
+		this.address = address;
+	}
+	
 	public void addMember(SingleClubMember member) {
 		singleMembers.add(member);
 	}
@@ -42,6 +50,10 @@ public class Club {
 	// object of Club
 	public static void removeMember(MultipleClubMember member) {
 		multiMembers.remove(member);
+	}
+	
+	public String toString() {
+		return ("This " + this.name + " is located at " + this.address );
 	}
 	
 	

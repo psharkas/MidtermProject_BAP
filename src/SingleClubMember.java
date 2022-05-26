@@ -1,6 +1,7 @@
 
 public class SingleClubMember extends Member{
 	
+<<<<<<< HEAD
 	public SingleClubMember(String name, int id) {
 		super(name, id);
 		// TODO Auto-generated constructor stub
@@ -48,6 +49,16 @@ public class SingleClubMember extends Member{
 	//do we want to add secondary ID in case two members have same name?
 	
 	 //singleClub single = new singleClub (id, name, clubNum)
+=======
+	public String iD;
+	public String name;
+	public int clubNum;
+	//do we want to add secondary ID in case two members have same name?
+	
+	 singleClub single = new singleClub (id, name, clubNum) 
+			 
+	//track the club member is assigned to
+>>>>>>> PetersBranch
 			 
 	//When member is checked in confirm club is assigned club
 	//loop through info to check assigned club
@@ -55,6 +66,10 @@ public class SingleClubMember extends Member{
 
 	
 		
+<<<<<<< HEAD
 	
+=======
+	}
+>>>>>>> PetersBranch
 
 }
