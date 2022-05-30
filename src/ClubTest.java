@@ -4,27 +4,26 @@ import org.junit.jupiter.api.Test;
 
 class ClubTest {
 	
+	// test that a single club member's club is the one they're assigned
 	@Test
-	void testMultiClubAdding() {
+	void testSingleClub() {
 		Club planetFitness = new Club();
-		MultipleClubMember multi = new MultipleClubMember();
-		Club.addMember(multi);
+		SingleClubMember newMember = new SingleClubMember("Peter",123,planetFitness);
 		
-		int expected = 0;
-		int actual = planetFitness.singleMembers.size();
-		assertNotNull(Club.multiMembers);
-		assertEquals(expected,actual);
+		assertEquals(planetFitness,newMember.getClub());
 	}
 	
+	// checks to see if name is settable
 	@Test
-	void testNoSingleAddedWhenMultiMemberAdded() {
+	void testClubName() {
 		Club planetFitness = new Club();
-		MultipleClubMember multi = new MultipleClubMember();
-		Club.addMember(multi);
+		planetFitness.setName("BAP Fitness Detroit");
+		planetFitness.setAddress("32 Woodward Ave");
 		
-		int expected = 0;
-		int actual = planetFitness.singleMembers.size();
-		assertEquals(expected,actual);
+		assertNotNull(planetFitness.getName());
+		
+		
+
 	}
 	
 
