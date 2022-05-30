@@ -56,6 +56,20 @@ public class FitnessApp {
 					System.out.println(newMember);
 					
 					break;
+				
+				case 2:
+					getName();
+					String multiMemberName = scan.nextLine();
+					System.out.println("Your name is: " + multiMemberName);
+					
+					int multiMemberId = generateId(ids);
+					System.out.println("Your member ID is: " + multiMemberId);
+					
+					MultipleClubMember newMultiMember = new MultipleClubMember(multiMemberName,multiMemberId);
+					multiMembers.add(newMultiMember);
+					System.out.println(newMultiMember);
+					break;
+					
 				default:
 					System.out.println("Invalid input.");
 				}
@@ -167,6 +181,5 @@ public class FitnessApp {
 	
 		return clubs.get(clubSelection-1);
 	}
-	
 	
 }

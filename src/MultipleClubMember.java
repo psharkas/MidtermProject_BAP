@@ -24,7 +24,7 @@ public class MultipleClubMember extends Member{
 
 	@Override
 	public String toString() {
-		return "MultipleClubMember [memPoints=" + memPoints + "]";
+		return (this.getName() + " is a multiple club member. " + this.getName() + " has access to all available clubs.");
 	}
 
 
