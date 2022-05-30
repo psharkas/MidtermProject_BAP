@@ -9,7 +9,7 @@ public class BillOfFees {
 	
 	public static void getFee(MultipleClubMember member) {
 		System.out.println("Fee for " + member.getName() + " is " + multiFee);
-		System.out.println(member.getName() + " has " + member.getMemberPoints() + " points");
+		System.out.println(member.getName() + " has " + member.getMemPoints() + " points");
 	}
 
 }

@@ -26,6 +26,6 @@ public class SingleClubMember extends Member{
 
 	@Override
 	public String toString() {
-		return "SingleClubMember [club=" + club + "]";
+		return (this.getName() + "is a single club member at " + this.club);
 	}
 }

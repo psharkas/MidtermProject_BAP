@@ -1,8 +1,27 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.lang.Math.*;
 
 public class FitnessApp {
 
 	public static void main(String[] args) {
+		
+		ArrayList<MultipleClubMember> multiMembers = new ArrayList<>();
+		ArrayList<Club> clubs = new ArrayList<>();
+		ArrayList<Integer> ids = new ArrayList<>();
+		
+		Club bapFitnessNovi = new Club("BAP Fitness Novi", "42 Novi Rd");
+		Club bapFitnessNorthville = new Club("BAP Fitness Northville", "24 Griswold St");
+		Club bapFitnessWixom = new Club("BAP Fitness Wixom", "962 Alpha Dr");
+		Club bapFitnessWestBloomfield = new Club("BAP Fitness West Bloomfield","6475 Drake Rd");
+		
+		clubs.add(bapFitnessNovi);
+		clubs.add(bapFitnessNorthville);
+		clubs.add(bapFitnessWixom);
+		clubs.add(bapFitnessWestBloomfield);
+
+
+		
 		Scanner scan = new Scanner(System.in);
 
 		dashes(80);
@@ -18,6 +37,31 @@ public class FitnessApp {
 		do {
 			if (userEntryChooseMemberMenu == 1) {
 				// create new member
+				createMember();
+				int memberSelection = scan.nextInt();
+				scan.nextLine();
+				
+				switch (memberSelection) {
+				case 1:
+					getName();
+					String memberName = scan.nextLine();
+					System.out.println("Your name is: " + memberName);
+					
+					int memberId = generateId(ids);
+					System.out.println("Your member ID is: " + memberId);
+					
+					Club memberClub = selectClub(scan, clubs);
+					
+					SingleClubMember newMember = new SingleClubMember(memberName,memberId,memberClub);
+					System.out.println(newMember);
+					
+					break;
+				default:
+					System.out.println("Invalid input.");
+				}
+				
+//				System.out.println("You chose: " + memberSelection);
+				
 			} else if (userEntryChooseMemberMenu == 2) {
 
 				existingMemberMenu();
@@ -88,4 +132,41 @@ public class FitnessApp {
 	public static void promptMenuChoice() {
 		System.out.print("\n" + "Please select menu option by number: ");
 	}
+	
+	public static void createMember() {
+		System.out.println("Would you like to become a single or multi-club member?");
+		indentPrintString(1, "1. Single Club Member");
+		indentPrintString(1, "2. Multi Club Member"); 
+	}
+	
+	public static void getName() {
+		System.out.println("Please enter your full name.");
+		
+	}
+	
+	public static int generateId(ArrayList<Integer> ids) {
+		boolean notUsed = true;
+		int generatedId;
+		
+		do {
+			generatedId = (int)(Math.random()*100) + 1;
+			if (!ids.contains(generatedId)) {
+				notUsed = false;
+			}
+		}while(notUsed);
+		return generatedId;
+	}
+	
+	public static Club selectClub(Scanner scan, ArrayList<Club> clubs) {
+		System.out.println("Please select the club you would like to join: ");
+		for (int i = 0; i < clubs.size(); i++) {
+			System.out.println( (i+1) + ". " + clubs.get(i));
+		}
+		int clubSelection = scan.nextInt();
+		scan.nextLine();
+	
+		return clubs.get(clubSelection-1);
+	}
+	
+	
 }

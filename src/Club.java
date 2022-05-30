@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Club {
 	
 	private String name;
@@ -28,7 +26,7 @@ public class Club {
 	}
 	
 	public String toString() {
-		return ("This " + this.name + " is located at " + this.address );
+		return (this.name + ", located at " + this.address );
 	}
 	
 	
