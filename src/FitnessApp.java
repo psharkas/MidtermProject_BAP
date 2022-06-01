@@ -1,3 +1,4 @@
+
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -115,6 +116,14 @@ public class FitnessApp {
 				// TODO: put this switch in a method for ease of reading main
 				switch (userEntryExistingMemberMenu) {
 				case 1: // check user in (ask them which club they like to check in to
+					System.out.println("What club would you like to check in to?");
+					
+					ArrayList<Club> clubArray = new ArrayList<>();
+					clubArray.add(0, new Club("Club 1", "Detroit, MI"));
+					clubArray.add(1, new Club("Club 2", "Detroit, MI"));
+					clubArray.add(2, new Club("Club 3", "Detroit, MI"));
+					clubArray.add(3, new Club("Club 4", "Detroit, MI"));
+					System.out.println(clubArray.get(0).getName());
 
 					break;
 				case 2:
@@ -152,7 +161,6 @@ public class FitnessApp {
 			}
 		}
 		scan.close();
-
 	}
 
 	public static void printWithDashes(String str) {

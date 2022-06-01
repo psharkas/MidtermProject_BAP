@@ -3,8 +3,8 @@ public class MultipleClubMember extends Member{
 	
 	public MultipleClubMember(String name, int id) {
 		super(name, id);
-		// TODO Auto-generated constructor stub
-	}
+		}
+
 
 	private int memPoints;
 
@@ -24,11 +24,17 @@ public class MultipleClubMember extends Member{
 
 	@Override
 	public String toString() {
-		return (this.getName() + " is a multiple club member. " + this.getName() + " has access to all available clubs.");
+		return "MultipleClubMember [memPoints=" + memPoints + "]";
 	}
 
 
+	//Welcome bonus
 	
+	public void welcomeBonus(int memPoints) {
+		memPoints += 3000;
+	}
+
+
 
 	
 }

@@ -11,12 +11,30 @@ public class SingleClubMember extends Member {
 
 	@Override
 	public void checkIn(Club club) {
+
 		if (this.club.equals(club)) {
 			System.out.println("Welcome to your club!");
 		} else {
+		//Need exception here
+		
+		/*
+		 * if (this.club.equals(club)) { System.out.println("Welcome to your club!"); }
+		 * else { System.out.println("This is not your club."); }
+		 */
+		
+		try {
+			
+			if (this.club.equals(club)) {
+				throw new IllegalArgumentException("Must attend home club!");
+			}
+			
+		
+		} catch (IllegalArgumentException e) {
 			System.out.println("This is not your club.");
 		}
+
 	}
+		}
 
 	public Club getClub() {
 		return club;
