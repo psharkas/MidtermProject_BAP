@@ -9,7 +9,15 @@ public class BillOfFees {
 	
 	public static void getFee(MultipleClubMember member) {
 		System.out.println("Fee for " + member.getName() + " is " + multiFee);
-		System.out.println(member.getName() + " has " + member.getMemberPoints() + " points");
+		System.out.println(member.getName() + " has " + member.getMemPoints() + " points");
+	}
+	
+	public static void getFee(Member mem) {
+		if(mem instanceof MultipleClubMember) {
+			getFee((MultipleClubMember) mem);
+		}else if (mem instanceof SingleClubMember) {
+			getFee((SingleClubMember) mem);
+		}
 	}
 
 }
