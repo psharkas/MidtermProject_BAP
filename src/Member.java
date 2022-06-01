@@ -25,12 +25,17 @@ abstract class Member {
 		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "Member name: " + name +" | " + "Member ID: " + id;
-		
+	public void printMemberInfo() {
+		System.out.println("Member ID: " + id);
+		System.out.println("Member name: " + name);
 	}
 
 	public abstract void checkIn(Club club);
 
+	@Override
+	public String toString() {
+		return "Member [name=" + name + ", id=" + id + "]";
+	}
+
 }
+

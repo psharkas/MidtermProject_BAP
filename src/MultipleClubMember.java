@@ -28,7 +28,11 @@ public class MultipleClubMember extends Member{
 	}
 
 
+	//Welcome bonus
 	
+	public void welcomeBonus(int memPoints) {
+		memPoints += 3000;
+	}
 
 	
 }

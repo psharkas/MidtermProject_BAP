@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FitnessApp {
@@ -27,31 +28,35 @@ public class FitnessApp {
 
 				switch (userEntryExistingMemberMenu) {
 				case 1: // check user in (ask them which club they like to check in to
-
-					break;
-				case 2: // select a specific member, then generate their bill (based on single or multi
-						// member)
-
-					break;
-				case 3:// ask user to confirm deletion again if yes, delete. if no, exit or
-						// something....
-
-					break;
-				case 4:
-
-					break;
-
-				default:
-				}
-
-			}
-		} while (userEntryChooseMemberMenu != 1 && userEntryChooseMemberMenu != 2);
-		
-		
-		
-		
-		
-	scan.close();
+					System.out.println("What club would you like to check in to?");
+					ArrayList<Club> clubArray = new ArrayList<>();
+					clubArray.add(0, new Club("Club 1", "Detroit, MI"));
+					clubArray.add(1, new Club("Club 2", "Detroit, MI"));
+					clubArray.add(2, new Club("Club 3", "Detroit, MI"));
+					clubArray.add(3, new Club("Club 4", "Detroit, MI"));
+					System.out.println(clubArray.get(0).getName());
+					 break; 
+					
+					  case 2: // select a specific member, then generate their bill (based on
+					  //single or multi // member)
+					  
+					  break; case 3:// ask user to confirm deletion again if yes, delete. if no,
+					  //exit or // something....
+					  
+					  break; case 4:
+					  
+					  break;
+					  
+					  default: }
+					  
+					  } } while (userEntryChooseMemberMenu != 1 && userEntryChooseMemberMenu != 2);
+					  
+					  
+					  
+					  
+					  
+					  scan.close();
+					 
 	}
 
 	public static void printWithDashes(String str) {
