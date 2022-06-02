@@ -24,9 +24,8 @@ public class FitnessApp {
 		clubs.add(bapFitnessWestBloomfield);
 
 
-
 		//hard-coded arraylist called into the program
-		ArrayList<Member> memberList = initializeMemberList();
+		ArrayList<Member> memberList = initializeMemberList(clubs);
 
 
 		Scanner scan = new Scanner(System.in);
@@ -46,8 +45,8 @@ public class FitnessApp {
 			if (userEntryChooseMemberMenu == 1) {
 				// create new member
 				createMember();
-				int memberSelection = scan.nextInt();
-				scan.nextLine();
+				int memberSelection = promptUserForInt(scan, 2);
+				//scan.nextLine();
 				
 				switch (memberSelection) {
 				case 1:
@@ -60,8 +59,9 @@ public class FitnessApp {
 					
 					Club memberClub = selectClub(scan, clubs);
 					
-					SingleClubMember newMember = new SingleClubMember(memberName,memberId,memberClub);
-					System.out.println(newMember);
+					memberList.add(new SingleClubMember(memberName,memberId, memberClub));
+		
+					System.out.println();
 					
 					break;
 				
@@ -72,10 +72,10 @@ public class FitnessApp {
 					
 					int multiMemberId = generateId(ids);
 					System.out.println("Your member ID is: " + multiMemberId);
-					
-					MultipleClubMember newMultiMember = new MultipleClubMember(multiMemberName,multiMemberId);
-					multiMembers.add(newMultiMember);
-					System.out.println(newMultiMember);
+					MultipleClubMember newMultiClubMem = new MultipleClubMember(multiMemberName,multiMemberId);
+					memberList.add(newMultiClubMem);
+					newMultiClubMem.welcomeBonus();
+					System.out.println("Thank you for joining BAP Fitness!");
 					break;
 					
 				default:
@@ -105,7 +105,7 @@ public class FitnessApp {
 				}
 				if (indexOfMember == -1) {
 					System.out.println("We cannot find this member.");
-					System.out.println("Please check again by entering your ID number or feel free to become a member of BAP Fitness!");
+					System.out.println("Please check again or feel free to become a member of BAP Fitness!");
 					continue;
 				}
 				//display menu for checking in, user info and billing, and canceling membership. Get user int to go into switch
@@ -140,7 +140,7 @@ public class FitnessApp {
 					indentPrintString(5, "2. No");
 					int deleteYN = promptUserForInt(scan, 2);
 					if (deleteYN == 1) {
-						System.out.println(memberList.get(indexOfMember).getName() + "has been removed from BAP Fitness. We're sorry to see you go!");
+						System.out.println(memberList.get(indexOfMember).getName() + " has been removed from BAP Fitness. We're sorry to see you go!");
 						memberList.remove(indexOfMember);
 						continue;
 					}else if (deleteYN == 2) {
@@ -212,10 +212,11 @@ public class FitnessApp {
 		System.out.println("Would you like to become a single or multi-club member?");
 		indentPrintString(1, "1. Single Club Member");
 		indentPrintString(1, "2. Multi Club Member"); 
+		
 	}
 	
 	public static void getName() {
-		System.out.println("Please enter your full name.");
+		System.out.print("Please enter your full name: ");
 		
 	}
 	
@@ -238,8 +239,8 @@ public class FitnessApp {
 		for (int i = 0; i < clubs.size(); i++) {
 			System.out.println( (i+1) + ". " + clubs.get(i));
 		}
-		int clubSelection = scan.nextInt();
-		scan.nextLine();
+		int clubSelection = promptUserForInt(scan, 4);
+		//scan.nextLine();
 	
 		return clubs.get(clubSelection-1);
 	}
@@ -252,13 +253,13 @@ public class FitnessApp {
 	
 	
 	//hard-coded arraylist
-	public static ArrayList<Member> initializeMemberList() {
+	public static ArrayList<Member> initializeMemberList(ArrayList<Club> clubs) {
 		
 		ArrayList<Member> memberList = new ArrayList<Member>();
 		memberList.add(new MultipleClubMember("Brian Smith", 457299));
 		memberList.add(new MultipleClubMember("Booboo Thefool", 123456));
-		memberList.add(new SingleClubMember("Lookat Thisguy", 654321, null));
-		memberList.add(new SingleClubMember("Who Dunnit", 678901, null));
+		memberList.add(new SingleClubMember("Lookat Thisguy", 654321, clubs.get(1)));
+		memberList.add(new SingleClubMember("Who Dunnit", 678901, clubs.get(2)));
 
 		return memberList;
 	}
@@ -301,3 +302,7 @@ public class FitnessApp {
 
 }
 
+
+//fix arraylists DONE
+//make name checking case insensitive
+//assigning and checking clubs for singleclub members
