@@ -227,6 +227,7 @@ public class FitnessApp {
 			generatedId = (int)(Math.random()*100) + 1;
 			if (!ids.contains(generatedId)) {
 				notUsed = false;
+				ids.add(generatedId);
 			}
 		}while(notUsed);
 		return generatedId;
