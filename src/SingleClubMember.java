@@ -13,6 +13,7 @@ public class SingleClubMember extends Member{
 	
 	@Override
 	public void checkIn(Club club) {
+<<<<<<< Updated upstream
 		//Need exception here
 		
 		/*
@@ -32,6 +33,14 @@ public class SingleClubMember extends Member{
 			
 		}
  
+=======
+		if (this.club.equals(club)) { 
+			System.out.println("Welcome to your club!"); 
+		  } 
+		else { 
+			throw new IllegalArgumentException("Must attend home club!"); }
+
+>>>>>>> Stashed changes
 	}
 
 
