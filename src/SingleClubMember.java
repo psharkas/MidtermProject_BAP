@@ -15,26 +15,11 @@ public class SingleClubMember extends Member {
 		if (this.club.equals(club)) {
 			System.out.println("Welcome to your club!");
 		} else {
-		//Need exception here
-		
-		/*
-		 * if (this.club.equals(club)) { System.out.println("Welcome to your club!"); }
-		 * else { System.out.println("This is not your club."); }
-		 */
-		
-		try {
-			
-			if (this.club.equals(club)) {
-				throw new IllegalArgumentException("Must attend home club!");
-			}
-			
-		
-		} catch (IllegalArgumentException e) {
-			System.out.println("This is not your club.");
+			System.out.println("This is not your club");
+			throw new IllegalArgumentException();
 		}
-
+		
 	}
-		}
 
 	public Club getClub() {
 		return club;
