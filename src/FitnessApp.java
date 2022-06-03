@@ -92,8 +92,17 @@ public class FitnessApp {
 					System.out.print("Please enter user name here: ");
 					System.out.println("");
 					String userNameEntry = scan.nextLine(); 
-					indexOfMember = findMemberByName(memberList, userNameEntry);
+					// add the duplicate name checker here
+					boolean checkName = checkMoreThanOneName(memberList,userNameEntry);
+					if (!checkName) {
+						indexOfMember = findMemberByName(memberList, userNameEntry);
+					}
+					System.out.println("There is more than one member named " + userNameEntry + ". Please enter your ID to check in instead." );
+					int userIDentry = scan.nextInt();
+					System.out.println("");
+					indexOfMember = findMemberById(memberList, userIDentry);
 
+					
 				} else {
 					System.out.print("Please enter user ID here: ");
 					int userIDentry = scan.nextInt();
@@ -296,7 +305,7 @@ public class FitnessApp {
 	public static boolean checkMoreThanOneName(ArrayList <Member> mem, String name) {
 		int total = 0;
 		for (int i = 0; i < mem.size(); i++) {
-			if(mem.get(i).equals(name)) {
+			if(mem.get(i).getName().equals(name)) {
 				total+= 1;
 				if(total > 1) {
 					return true;

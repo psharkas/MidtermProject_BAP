@@ -18,30 +18,23 @@ class ClubTest {
 	
 	
 	// checks to see that no generated ids are the same
+	// need to try a new test to make sure no duplicate ids exist...
 	@Test
-	void testGeneratedId() {
-		ArrayList<Integer> ids = new ArrayList<>();
-		ArrayList<Integer> nums = new ArrayList<>();
-		boolean actual = false;
+	void testSameMemberName() {
+		ArrayList<Club> clubs = new ArrayList<>();
+		Club jeezlouise = new Club("Jeez Louise", "123 Joe Mama's Street");
+		clubs.add(jeezlouise);
+
+		
+		ArrayList<Member> memberList =  new ArrayList<>();
+		SingleClubMember newMember1 = new SingleClubMember("Joe",124,jeezlouise);
+		SingleClubMember newMember2 = new SingleClubMember("Joe",125,jeezlouise);
+		memberList.add(newMember1);
+		memberList.add(newMember2);
+
+		boolean actual = FitnessApp.checkMoreThanOneName(memberList,"Joe");
 		boolean expected = true;
 		
-		for (int i = 0; i < 100; i++) {
-			FitnessApp.generateId(ids);
-		} 
-		
-		for (int i = 1; i <= 100; i++) {
-			nums.add(i);
-		}
-		Collections.sort(ids);
-		Collections.sort(nums);
-		
-		System.out.println(ids);
-		System.out.println(nums);
-
-
-		if (ids.equals(nums)) {
-			actual = true;
-		}
 		
 		assertEquals(actual,expected);
 		
