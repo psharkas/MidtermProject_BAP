@@ -99,7 +99,7 @@ public class FitnessApp {
 					}
 					else {
 						System.out.println("There is more than one member named " + userNameEntry + ". Please enter your ID to check in instead." );
-						int userIDentry = scan.nextInt();
+						int userIDentry = validateInt(scan);
 						System.out.println("");
 						indexOfMember = findMemberById(memberList, userIDentry);
 					}
@@ -322,7 +322,7 @@ public class FitnessApp {
 		
 		do {
 			if (scan.hasNext("[A-Za-z]*")) {
-				input = scan.next();
+				input = scan.nextLine();
 			}
 			else {
 				System.out.println("Invalid input, please try again.");
@@ -340,9 +340,7 @@ public class FitnessApp {
 			System.out.println("Invalid input, try again.");
 			System.out.println("");
 			scan.next();
-			
-			System.out.println("What would you like to do?" + "\n");
-			chooseMemberMenu();
+
 		}
 		input = scan.nextInt();
 		
