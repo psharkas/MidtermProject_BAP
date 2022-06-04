@@ -47,7 +47,7 @@ public class FitnessApp {
 				switch (memberSelection) {
 				case 1:
 					getName();
-					String memberName = scan.nextLine();
+					String memberName = validateString(scan);
 					System.out.println("Your name is: " + memberName);
 
 					int memberId = generateId(ids);
@@ -63,7 +63,7 @@ public class FitnessApp {
 
 				case 2:
 					getName();
-					String multiMemberName = scan.nextLine();
+					String multiMemberName = validateString(scan);
 					System.out.println("Your name is: " + multiMemberName);
 
 					int multiMemberId = generateId(ids);
@@ -91,17 +91,18 @@ public class FitnessApp {
 				if (numOrID == 1) {
 					System.out.print("Please enter user name here: ");
 					System.out.println("");
-					String userNameEntry = scan.nextLine(); 
+					String userNameEntry = validateString(scan); 
 					// add the duplicate name checker here
 					boolean checkName = checkMoreThanOneName(memberList,userNameEntry);
 					if (!checkName) {
 						indexOfMember = findMemberByName(memberList, userNameEntry);
 					}
-					System.out.println("There is more than one member named " + userNameEntry + ". Please enter your ID to check in instead." );
-					int userIDentry = scan.nextInt();
-					System.out.println("");
-					indexOfMember = findMemberById(memberList, userIDentry);
-
+					else {
+						System.out.println("There is more than one member named " + userNameEntry + ". Please enter your ID to check in instead." );
+						int userIDentry = scan.nextInt();
+						System.out.println("");
+						indexOfMember = findMemberById(memberList, userIDentry);
+					}
 					
 				} else {
 					System.out.print("Please enter user ID here: ");
@@ -273,7 +274,7 @@ public class FitnessApp {
 		int heresANum;
 		do {
 			System.out.print("Please select menu option by number: ");
-			heresANum = scan.nextInt();
+			heresANum = validateInt(scan);
 			scan.nextLine();
 			System.out.println("");
 		} while (heresANum <= 0 || heresANum > maxNum);
@@ -314,6 +315,39 @@ public class FitnessApp {
 			
 		}
 		return false;
+	}
+	
+	public static String validateString(Scanner scan) {
+		String input = "";
+		
+		do {
+			if (scan.hasNext("[A-Za-z]*")) {
+				input = scan.next();
+			}
+			else {
+				System.out.println("Invalid input, please try again.");
+				scan.next();
+			}
+		}while(input.equals(""));
+		
+		return input;
+	}
+	
+	public static int validateInt(Scanner scan) {
+		int input;
+				
+		while (!scan.hasNextInt()) {
+			System.out.println("Invalid input, try again.");
+			System.out.println("");
+			scan.next();
+			
+			System.out.println("What would you like to do?" + "\n");
+			chooseMemberMenu();
+		}
+		input = scan.nextInt();
+		
+		System.out.println(input);
+		return input;
 	}
 
 }
