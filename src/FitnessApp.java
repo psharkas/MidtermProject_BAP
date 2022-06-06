@@ -26,51 +26,51 @@ public class FitnessApp {
 
 		Scanner scan = new Scanner(System.in);
 
-		dashes(80);
+		dashes(80); 
 		System.out.printf("%65s", "Welcome to BAP Fitness, where your health matters most!" + "\n");
 		dashes(80);
 
 		System.out.println("What would you like to do?" + "\n");
 
-		while (true) {
+		while (true) {//O(n)
 			// ask user if they want to create new member or access existing member
 			chooseMemberMenu();
-			int userEntryChooseMemberMenu = promptUserForInt(scan, 3);
+			int userEntryChooseMemberMenu = promptUserForInt(scan, 3); //O1 if appropriate input, O(n) in worst case probably
 			int indexOfMember;
 
-			if (userEntryChooseMemberMenu == 1) {
+			if (userEntryChooseMemberMenu == 1) { //O1
 				// create new member
-				createMember();
-				int memberSelection = promptUserForInt(scan, 2);
+				createMember(); //O1
+				int memberSelection = promptUserForInt(scan, 2); //O1 if appropriate input, O(n) in worst case probably
 				// scan.nextLine();
 
-				switch (memberSelection) {
+				switch (memberSelection) {//O1
 				case 1:
-					getName();
+					getName(); //O1
 					String memberName = scan.nextLine();
 					System.out.println("Your name is: " + memberName);
 
-					int memberId = generateId(ids);
+					int memberId = generateId(ids); //O(n) for our purposes !!!!! O(n2) BEST CANDIDATE
 					System.out.println("Your member ID is: " + memberId);
 
-					Club memberClub = selectClub(scan, clubs);
+					Club memberClub = selectClub(scan, clubs); //O(n)
 
-					memberList.add(new SingleClubMember(memberName, memberId, memberClub));
+					memberList.add(new SingleClubMember(memberName, memberId, memberClub));//O(1)
 
 					System.out.println();
 
 					break;
 
 				case 2:
-					getName();
+					getName();//O1
 					String multiMemberName = scan.nextLine();
 					System.out.println("Your name is: " + multiMemberName);
 
-					int multiMemberId = generateId(ids);
+					int multiMemberId = generateId(ids); // O(n)
 					System.out.println("Your member ID is: " + multiMemberId);
 					MultipleClubMember newMultiClubMem = new MultipleClubMember(multiMemberName, multiMemberId);
 					memberList.add(newMultiClubMem);
-					newMultiClubMem.welcomeBonus();
+					newMultiClubMem.welcomeBonus(); // O1
 					System.out.println("Thank you for joining BAP Fitness!");
 					break;
 
@@ -86,7 +86,7 @@ public class FitnessApp {
 				dashes(50);
 				indentPrintString(1, "1. Enter your name");
 				indentPrintString(1, "2. Enter your ID number");
-				int numOrID = promptUserForInt(scan, 2);
+				int numOrID = promptUserForInt(scan, 2); //O1 if appropriate input, O(n) in worst case probably
 
 				if (numOrID == 1) {
 					System.out.print("Please enter user name here: ");
@@ -108,7 +108,7 @@ public class FitnessApp {
 				// display menu for checking in, user info and billing, and canceling
 				// membership. Get user int to go into switch
 				existingMemberMenu();
-				int userEntryExistingMemberMenu = promptUserForInt(scan, 3);
+				int userEntryExistingMemberMenu = promptUserForInt(scan, 3); //O1 if appropriate input, O(n) in worst case probably
 
 				// TODO: put this switch in a method for ease of reading main
 				switch (userEntryExistingMemberMenu) {
@@ -118,7 +118,7 @@ public class FitnessApp {
 					// int clubResponse = checkInClub(scan, clubs);
 					try {
 
-						memberList.get(indexOfMember).checkIn(selectClub(scan, clubs));
+						memberList.get(indexOfMember).checkIn(selectClub(scan, clubs)); //O(1)
 
 					} catch (IllegalArgumentException e) {
 
@@ -216,9 +216,8 @@ public class FitnessApp {
 
 	}
 
-	public static int generateId(ArrayList<Integer> ids) {
+	public static int generateId(ArrayList<Integer> ids) { //O(n) for our purposes (<100ish)  improve by using hash set, .contains for hash set/map is O(1)
 		boolean notUsed = true;
-
 		SecureRandom randomInt = new SecureRandom();
 		int generatedId;
 
@@ -232,12 +231,12 @@ public class FitnessApp {
 		return generatedId;
 	}
 
-	public static Club selectClub(Scanner scan, ArrayList<Club> clubs) {
+	public static Club selectClub(Scanner scan, ArrayList<Club> clubs) { //O(n)
 		System.out.println("Please select your preferred club: ");
 		for (int i = 0; i < clubs.size(); i++) {
 			System.out.println((i + 1) + ". " + clubs.get(i));
 		}
-		int clubSelection = promptUserForInt(scan, clubs.size());
+		int clubSelection = promptUserForInt(scan, clubs.size()); 
 
 		return clubs.get(clubSelection - 1);
 	}
@@ -260,7 +259,7 @@ public class FitnessApp {
 
 	// prompts user to select menu option. Has a range set (1 to maxNum) and loops
 	// until it gets num in that range
-	public static int promptUserForInt(Scanner scan, int maxNum) {
+	public static int promptUserForInt(Scanner scan, int maxNum) { //O1 sometimes, likely O(n)? when repeated
 		int heresANum;
 		do {
 			System.out.print("Please select menu option by number: ");
@@ -273,9 +272,9 @@ public class FitnessApp {
 	}
 
 	// gives method a list and a ID name and return the index of a member
-	public static int findMemberByName(ArrayList<Member> memberList, String memberName) {
+	public static int findMemberByName(ArrayList<Member> memberList, String memberName) {//O(n)  BEST CANDIDATE
 		for (int i = 0; i <= memberList.size() - 1; i++) {
-			if (memberList.get(i).getName().equals(memberName)) {
+			if (memberList.get(i).getName().equals(memberName)) {//comparing best case O(1), worst case(long string, same length, not a match until the last letter) O(n)
 				return i;
 			}
 		}
@@ -283,7 +282,7 @@ public class FitnessApp {
 	}
 
 	// gives method a list and a ID number and return the index of a member
-	public static int findMemberById(ArrayList<Member> memberList, int ID) {
+	public static int findMemberById(ArrayList<Member> memberList, int ID) { //O(n)  BEST CANDIDATE
 
 		for (int i = 0; i <= memberList.size() - 1; i++) {
 			if (memberList.get(i).getId() == ID) {
@@ -293,7 +292,7 @@ public class FitnessApp {
 		return -1;
 	}
 	
-	public static boolean checkMoreThanOneName(ArrayList <Member> mem, String name) {
+	public static boolean checkMoreThanOneName(ArrayList <Member> mem, String name) { //probably O(n)  
 		int total = 0;
 		for (int i = 0; i < mem.size(); i++) {
 			if(mem.get(i).equals(name)) {
