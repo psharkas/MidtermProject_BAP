@@ -2,7 +2,7 @@
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.lang.Math.*;
+//import java.lang.Math.*;
 
 public class FitnessApp {
 
@@ -21,6 +21,7 @@ public class FitnessApp {
 		clubs.add(bapFitnessWixom);
 		clubs.add(bapFitnessWestBloomfield);
 
+		
 		// hard-coded arraylist called into the program
 		ArrayList<Member> memberList = initializeMemberList(clubs);
 
@@ -52,12 +53,14 @@ public class FitnessApp {
 
 					int memberId = generateId(ids);
 					System.out.println("Your member ID is: " + memberId);
+					dashes(50);
+					System.out.println("");
 
 					Club memberClub = selectClub(scan, clubs);
 
 					memberList.add(new SingleClubMember(memberName, memberId, memberClub));
 
-					System.out.println();
+					System.out.println(memberClub +" is your preferred location. Welcome!");
 
 					break;
 
@@ -72,6 +75,7 @@ public class FitnessApp {
 					memberList.add(newMultiClubMem);
 					newMultiClubMem.welcomeBonus();
 					System.out.println("Thank you for joining BAP Fitness!");
+					System.out.println("Here are 3000 points for becoming a new Multi-Club Member!");
 					break;
 
 				default:
@@ -90,7 +94,6 @@ public class FitnessApp {
 
 				if (numOrID == 1) {
 					System.out.print("Please enter user name here: ");
-					System.out.println("");
 					String userNameEntry = validateString(scan); 
 					// add the duplicate name checker here
 					boolean checkName = checkMoreThanOneName(memberList,userNameEntry);
@@ -98,7 +101,8 @@ public class FitnessApp {
 						indexOfMember = findMemberByName(memberList, userNameEntry);
 					}
 					else {
-						System.out.println("There is more than one member named " + userNameEntry + ". Please enter your ID to check in instead." );
+						System.out.println("There is more than one member named " + userNameEntry + ".");
+						System.out.print("Please enter ID to check in instead: " );
 						int userIDentry = validateInt(scan);
 						System.out.println("");
 						indexOfMember = findMemberById(memberList, userIDentry);
@@ -106,7 +110,7 @@ public class FitnessApp {
 					
 				} else {
 					System.out.print("Please enter user ID here: ");
-					int userIDentry = scan.nextInt();
+					int userIDentry = validateInt(scan);
 					System.out.println("");
 					indexOfMember = findMemberById(memberList, userIDentry);
 				}
@@ -132,7 +136,7 @@ public class FitnessApp {
 
 					} catch (IllegalArgumentException e) {
 
-						// System.out.println("");
+						 System.out.println("Your preferred club is " + ((SingleClubMember)memberList.get(indexOfMember)).getClub());
 					}
 					break;
 
@@ -199,9 +203,9 @@ public class FitnessApp {
 	// menu for existing members
 	public static void existingMemberMenu() {
 		dashes(50);
-		indentPrintString(3, "1. Check-in!");
-		indentPrintString(3, "2. See your membership information and billing");
-		indentPrintString(3, "3. Cancel your membership with BAP Fitness");
+		indentPrintString(2, "1. Check-in!");
+		indentPrintString(2, "2. See your membership information and billing");
+		indentPrintString(2, "3. Cancel your membership with BAP Fitness");
 	}
 
 	// prints a string with desired format indentation
@@ -216,8 +220,8 @@ public class FitnessApp {
 
 	public static void createMember() {
 		System.out.println("Would you like to become a single or multi-club member?");
-		indentPrintString(1, "1. Single Club Member");
-		indentPrintString(1, "2. Multi Club Member");
+		indentPrintString(2, "1. Single Club Member");
+		indentPrintString(2, "2. Multi Club Member");
 
 	}
 
@@ -245,7 +249,7 @@ public class FitnessApp {
 	public static Club selectClub(Scanner scan, ArrayList<Club> clubs) {
 		System.out.println("Please select your preferred club: ");
 		for (int i = 0; i < clubs.size(); i++) {
-			System.out.println((i + 1) + ". " + clubs.get(i));
+			indentPrintString(2, (i + 1) + ". " + clubs.get(i));
 		}
 		int clubSelection = promptUserForInt(scan, clubs.size());
 
@@ -285,7 +289,7 @@ public class FitnessApp {
 	// gives method a list and a ID name and return the index of a member
 	public static int findMemberByName(ArrayList<Member> memberList, String memberName) {
 		for (int i = 0; i <= memberList.size() - 1; i++) {
-			if (memberList.get(i).getName().equals(memberName)) {
+			if (memberList.get(i).getName().equalsIgnoreCase(memberName)) {
 				return i;
 			}
 		}
@@ -306,7 +310,7 @@ public class FitnessApp {
 	public static boolean checkMoreThanOneName(ArrayList <Member> mem, String name) {
 		int total = 0;
 		for (int i = 0; i < mem.size(); i++) {
-			if(mem.get(i).getName().equals(name)) {
+			if(mem.get(i).getName().equalsIgnoreCase(name)) {
 				total+= 1;
 				if(total > 1) {
 					return true;
@@ -325,7 +329,8 @@ public class FitnessApp {
 				input = scan.nextLine();
 			}
 			else {
-				System.out.println("Invalid input, please try again.");
+				dashes(50);
+				System.out.print("Invalid input, please try again: ");
 				scan.next();
 			}
 		}while(input.equals(""));
@@ -337,14 +342,12 @@ public class FitnessApp {
 		int input;
 				
 		while (!scan.hasNextInt()) {
-			System.out.println("Invalid input, try again.");
-			System.out.println("");
-			scan.next();
-
+			dashes(50);
+			System.out.print("Invalid input, try again: ");
+			scan.next();	
 		}
 		input = scan.nextInt();
-		
-		System.out.println(input);
+		System.out.println("");
 		return input;
 	}
 

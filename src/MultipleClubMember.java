@@ -19,7 +19,7 @@ public class MultipleClubMember extends Member{
 	@Override
 	public void checkIn(Club club) {
 		memPoints += 50;
-		System.out.println("We welcome our mutli club members. Here's 50 points!");
+		System.out.println("We welcome our multi club members. Here's 50 points!");
 		
 	}
 
